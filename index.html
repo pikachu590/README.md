@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxeDrive - Premium Car Rentals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Link to extracted stylesheet -->
+    <link rel="stylesheet" href="style2.css">
+</head>
+<body class="bg-gray-50 overflow-x-hidden">
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50 glass-effect transition-all duration-300" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="bg-gradient-to-r from-purple-600 to-blue-600 p-3 rounded-xl">
+                        <i class="fas fa-car text-black text-xl"></i>
+                    </div>
+                    <h1 class="text-2xl font-bold gradient-text-black">RideOn</h1>
+                </div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8">
+                    <button onclick="showSection('home')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Home</button>
+                    <button onclick="showSection('cars')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">Ride</button>
+                    <button onclick="showSection('bookings')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">My Bookings</button>
+                    <button onclick="showSection('about')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium">About</button>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button class="md:hidden text-white" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Mobile Menu -->
+            <div id="mobileMenu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-3">
+                    <button onclick="showSection('home')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">Home</button>
+                    <button onclick="showSection('cars')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">Fleet</button>
+                    <button onclick="showSection('bookings')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">My Bookings<a href="registration.html"></a></button>
+                    <button onclick="showSection('about')" class="nav-btn text-white hover:text-purple-300 transition-colors font-medium text-left">About</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section-content">
+        <!-- Hero Section -->
+        <div class="hero-gradient min-h-screen flex items-center justify-center relative overflow-hidden">
+            <div class="absolute inset-0 bg-black opacity-20"></div>
+            <div class="absolute inset-0">
+                <div class="floating-animation absolute top-20 left-10 w-20 h-20 bg-white opacity-10 rounded-full"></div>
+                <div class="floating-animation absolute top-40 right-20 w-32 h-32 bg-white opacity-5 rounded-full ex-style-1"></div>
+                <div class="floating-animation absolute bottom-20 left-1/4 w-16 h-16 bg-white opacity-10 rounded-full ex-style-2"></div>
+            </div>
+            
+            <div class="relative z-10 text-center text-white px-4 max-w-6xl mx-auto">
+                <h1 class="hero-title text-5xl md:text-7xl font-bold mb-6 fade-in">
+                    Drive Your <span class="text-yellow-400">Dreams</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 opacity-90 fade-in ex-style-3">
+                    Premium car rentals with unmatched luxury and service
+                </p>
+                <button onclick="showSection('cars')" class="bg-gradient-to-r from-yellow-400 to-orange-500 text-black px-8 py-4 rounded-full text-lg font-semibold hover:from-yellow-300 hover:to-orange-400 transform hover:scale-105 transition-all duration-300 pulse-glow fade-in ex-style-4">
+                    <i class="fas fa-car mr-2"></i>
+                    Explore Your Ride
+                </button>
+            </div>
+        </div>
+
+        <!-- Search Section -->
+        <div class="relative -mt-20 z-20 px-4">
+            <div class="max-w-6xl mx-auto">
+                <div class="bg-white rounded-3xl shadow-2xl p-8 glass-effect">
+                    <h3 class="text-2xl font-bold text-center mb-8 gradient-text">Find Your Perfect Ride</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">
+                                <i class="fas fa-map-marker-alt mr-2 text-purple-600"></i>Pickup Location
+                            </label>
+                            <select id="pickupLocation" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                                <option>New York, NY</option>
+                                <option>Los Angeles, CA</option>
+                                <option>Chicago, IL</option>
+                                <option>Miami, FL</option>
+                                <option>Las Vegas, NV</option>
+                            </select>
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">
+                                <i class="fas fa-calendar-alt mr-2 text-purple-600"></i>Pickup Date
+                            </label>
+                            <input type="date" id="pickupDate" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-gray-700">
+                                <i class="fas fa-calendar-check mr-2 text-purple-600"></i>Return Date
+                            </label>
+                            <input type="date" id="returnDate" class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                        </div>
+                        <div class="flex items-end">
+                            <button onclick="searchCars()" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                                <i class="fas fa-search mr-2"></i>Search Cars
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Features Section -->
+        <div class="py-20 bg-gradient-to-br from-gray-50 to-blue-50">
+            <div class="max-w-7xl mx-auto px-4">
+                <h2 class="text-4xl font-bold text-center mb-16 gradient-text">Why Choose LuxeDrive?</h2>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-gradient-to-r from-green-400 to-blue-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-shield-alt text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Premium Insurance</h3>
+                        <p class="text-gray-600">Comprehensive coverage for complete peace of mind during your journey.</p>
+                    </div>
+                    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-gradient-to-r from-purple-400 to-pink-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-clock text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">24/7 Support</h3>
+                        <p class="text-gray-600">Round-the-clock customer service to assist you whenever you need help.</p>
+                    </div>
+                    <div class="text-center p-8 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-2">
+                        <div class="bg-gradient-to-r from-yellow-400 to-orange-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
+                            <i class="fas fa-star text-white text-2xl"></i>
+                        </div>
+                        <h3 class="text-xl font-bold mb-4">Luxury Fleet</h3>
+                        <p class="text-gray-600">Premium vehicles maintained to the highest standards of excellence.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cars Section -->
+    <section id="cars" class="section-content hidden">
+        <div class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">Our Premium Fleet</h2>
+                    <p class="text-xl text-gray-600">Choose from our collection of luxury vehicles</p>
+                </div>
+                
+                <!-- Filters -->
+                <div class="bg-white rounded-2xl shadow-xl p-6 mb-12">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                        <select id="categoryFilter" class="p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                            <option value="">All Categories</option>
+                            <option value="economy">Economy</option>
+                            <option value="luxury">Luxury</option>
+                            <option value="suv">SUV</option>
+                            <option value="sports">Sports</option>
+                        </select>
+                        <select id="priceFilter" class="p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                            <option value="">All Prices</option>
+                            <option value="low">Under $100</option>
+                            <option value="medium">$100 - $300</option>
+                            <option value="high">Over $300</option>
+                        </select>
+                        <select id="fuelFilter" class="p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                            <option value="">All Fuel Types</option>
+                            <option value="gasoline">Gasoline</option>
+                            <option value="electric">Electric</option>
+                            <option value="hybrid">Hybrid</option>
+                        </select>
+                        <button onclick="applyFilters()" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                            <i class="fas fa-filter mr-2"></i>Apply Filters
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Car Grid -->
+                <div id="carGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Cars will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bookings Section -->
+<section id="bookings" class="section-content hidden">
+  <div class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-12">
+        <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">User Registration</h2>
+        <p class="text-xl text-gray-600">Create your account to manage bookings</p>
+      </div>
+
+      <!-- Registration Form -->
+      <div class="bg-white rounded-3xl shadow-xl p-8 max-w-lg mx-auto">
+        <form id="registrationForm" class="space-y-6">
+          
+          <!-- Account Type -->
+          <div class="flex space-x-6 justify-center">
+            <label class="flex items-center space-x-2">
+              <input type="radio" name="account" value="personal" checked class="accent-purple-600">
+              <span>Personal</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="radio" name="account" value="company" class="accent-purple-600">
+              <span>Company</span>
+            </label>
+          </div>
+
+          <!-- Email -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Email</label>
+            <input type="email" required
+              class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200">
+          </div>
+
+          <!-- Name -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Full Name</label>
+            <input type="text" required
+              class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200">
+          </div>
+
+          <!-- Password -->
+          <div>
+            <label class="block text-sm font-semibold text-gray-700 mb-2">Password</label>
+            <input type="password" required
+              class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200">
+          </div>
+
+          <!-- Gender -->
+          <div class="flex space-x-6 justify-center">
+            <label class="flex items-center space-x-2">
+              <input type="radio" name="gender" value="male" checked class="accent-purple-600">
+              <span>Male</span>
+            </label>
+            <label class="flex items-center space-x-2">
+              <input type="radio" name="gender" value="female" class="accent-purple-600">
+              <span>Female</span>
+            </label>
+          </div>
+
+          <!-- Privacy Policy -->
+          <p class="text-sm text-gray-600 text-center">
+            By clicking Register, you agree to our 
+            <a href="#" class="text-purple-600 hover:underline">Privacy Policy</a>.
+          </p>
+
+          <!-- Submit -->
+          <button type="submit"
+            class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+            Register
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+    <!-- About Section -->
+    <section id="about" class="section-content hidden">
+        <div class="pt-24 pb-12 bg-gradient-to-br from-gray-50 to-blue-50 min-h-screen">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl md:text-5xl font-bold gradient-text mb-4">About LuxeDrive</h2>
+                    <p class="text-xl text-gray-600 max-w-3xl mx-auto">We're passionate about providing exceptional car rental experiences with premium vehicles and outstanding service.</p>
+                </div>
+                
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+                    <div class="space-y-6">
+                        <h3 class="text-3xl font-bold text-gray-800">Our Mission</h3>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            At LuxeDrive, we believe that every journey should be extraordinary. We provide access to premium vehicles 
+                            that combine luxury, performance, and reliability to make your travel experience unforgettable.
+                        </p>
+                        <div class="grid grid-cols-2 gap-6">
+                            <div class="text-center p-6 bg-white rounded-xl shadow-lg">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">500+</div>
+                                <div class="text-gray-600">Premium Cars</div>
+                            </div>
+                            <div class="text-center p-6 bg-white rounded-xl shadow-lg">
+                                <div class="text-3xl font-bold text-purple-600 mb-2">50+</div>
+                                <div class="text-gray-600">Locations</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-8 text-white">
+                        <h3 class="text-2xl font-bold mb-6">Why Choose Us?</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-yellow-400"></i>
+                                <span>Premium vehicle selection</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-yellow-400"></i>
+                                <span>Competitive pricing</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-yellow-400"></i>
+                                <span>24/7 customer support</span>
+                            </div>
+                            <div class="flex items-center space-x-3">
+                                <i class="fas fa-check-circle text-yellow-400"></i>
+                                <span>Flexible rental terms</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Modal -->
+    <div id="bookingModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
+        <div class="bg-white rounded-3xl p-8 max-w-2xl w-full mx-4 max-h-screen overflow-y-auto slide-in">
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="text-3xl font-bold gradient-text">Book Your Dream Car</h3>
+                <button onclick="closeBookingModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            
+            <div id="selectedCarInfo" class="mb-8"></div>
+            
+            <form id="bookingForm" class="space-y-6">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-user mr-2 text-purple-600"></i>Full Name
+                        </label>
+                        <input type="text" id="customerName" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-envelope mr-2 text-purple-600"></i>Email
+                        </label>
+                        <input type="email" id="customerEmail" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                </div>
+                
+                <div>
+                    <label class="block text-sm font-semibold text-gray-700 mb-2">
+                        <i class="fas fa-phone mr-2 text-purple-600"></i>Phone Number
+                    </label>
+                    <input type="tel" id="customerPhone" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-calendar-alt mr-2 text-purple-600"></i>Pickup Date
+                        </label>
+                        <input type="date" id="bookingPickupDate" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-2">
+                            <i class="fas fa-calendar-check mr-2 text-purple-600"></i>Return Date
+                        </label>
+                        <input type="date" id="bookingReturnDate" required class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+                    </div>
+                </div>
+                
+                <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
+                    <button type="button" onclick="closeBookingModal()" class="flex-1 bg-gray-200 text-gray-700 py-4 px-6 rounded-xl hover:bg-gray-300 transition-all duration-300 font-semibold">
+                        Cancel
+                    </button>
+                    <button type="submit" class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                        <i class="fas fa-credit-card mr-2"></i>Confirm Booking
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+<!-- Registration Modal -->
+<div id="registrationModal" class="fixed inset-0 modal-backdrop hidden items-center justify-center z-50 p-4">
+    <div class="bg-white rounded-3xl p-8 max-w-lg w-full mx-4 slide-in">
+        <div class="flex justify-between items-center mb-6">
+            <h3 class="text-2xl font-bold gradient-text">User Registration</h3>
+            <button onclick="closeRegistrationModal()" class="text-gray-500 hover:text-gray-700 text-2xl">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <form id="registrationForm" class="space-y-6">
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-user mr-2 text-purple-600"></i>Full Name
+                </label>
+                <input type="text" id="regName" required 
+                       class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-envelope mr-2 text-purple-600"></i>Email
+                </label>
+                <input type="email" id="regEmail" required 
+                       class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+            </div>
+            <div>
+                <label class="block text-sm font-semibold text-gray-700 mb-2">
+                    <i class="fas fa-lock mr-2 text-purple-600"></i>Password
+                </label>
+                <input type="password" id="regPassword" required 
+                       class="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-purple-500 focus:ring-2 focus:ring-purple-200 transition-all">
+            </div>
+
+            <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 pt-6">
+                <button type="button" onclick="closeRegistrationModal()" 
+                        cldass="flex-1 bg-gray-200 text-gray-700 py-4 px-6 rounded-xl hover:bg-gray-300 transition-all duration-300 font-semibold">
+                    Cancel
+                </button>
+                <button type="submit" 
+                        class="flex-1 bg-gradient-to-r from-purple-600 to-blue-600 text-white py-4 px-6 rounded-xl hover:from-purple-700 hover:to-blue-700 transition-all duration-300 font-semibold transform hover:scale-105">
+                    <i class="fas fa-user-plus mr-2"></i>Register
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+
+    <script src="script2.js"></script>
+</body>
+</html>
